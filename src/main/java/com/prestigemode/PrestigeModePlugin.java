@@ -77,6 +77,7 @@ public class PrestigeModePlugin extends Plugin
         prestigeSkills.put(Skill.FIREMAKING, new PrestigeSkill(client, InterfaceID.Stats.FIREMAKING, Skill.FIREMAKING, this.isSkillEnabled(Skill.FIREMAKING), false, this.config.showBanners(), this.config.combatUsability()));
         prestigeSkills.put(Skill.WOODCUTTING, new PrestigeSkill(client, InterfaceID.Stats.WOODCUTTING, Skill.WOODCUTTING, this.isSkillEnabled(Skill.WOODCUTTING), false, this.config.showBanners(), this.config.combatUsability()));
         prestigeSkills.put(Skill.FARMING, new PrestigeSkill(client, InterfaceID.Stats.FARMING, Skill.FARMING, this.isSkillEnabled(Skill.FARMING), false, this.config.showBanners(), this.config.combatUsability()));
+        prestigeSkills.put(Skill.SAILING, new PrestigeSkill(client, InterfaceID.Stats.SAILING, Skill.SAILING, this.isSkillEnabled(Skill.SAILING), false, this.config.showBanners(), this.config.combatUsability()));
 
         for (int i = 1; i <= MAX_PRESTIGE; i++)
         {
@@ -214,6 +215,9 @@ public class PrestigeModePlugin extends Plugin
                 break;
             case("Construction"):
                 isEnabled = this.config.constructionEnabled();
+                break;
+            case("Sailing"):
+                isEnabled = this.config.sailingEnabled();
                 break;
         }
 

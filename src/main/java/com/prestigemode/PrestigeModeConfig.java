@@ -297,4 +297,15 @@ public interface PrestigeModeConfig extends Config
     {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "sailingEnabled",
+            section = SECTION_SKILLS,
+            name = "Sailing",
+            description = "Enable prestige mode for the Sailing skill"
+    )
+    default boolean sailingEnabled()
+    {
+        return true;
+    }
 }
