@@ -137,12 +137,6 @@ class PrestigeSkill {
                 borderWidget.revalidate();
             }
         }
-
-//        if (skillsPage != null && !skillsPage.isHidden()) {
-//            skillsPage.setHidden(true);
-//            skillsPage.setHidden(false);
-//            skillsPage.invalidate
-//        }
     }
 
     private int getPrestige(int totalSkillXp) {
