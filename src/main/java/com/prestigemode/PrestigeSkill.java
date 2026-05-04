@@ -7,6 +7,7 @@ import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetPositionMode;
 import net.runelite.api.widgets.WidgetType;
+import net.runelite.client.callback.ClientThread;
 
 import javax.inject.Inject;
 
@@ -16,6 +17,7 @@ class PrestigeSkill {
     private static final int MAX_PRESTIGE = 15;
     private static final int PRESTIGE_SPRITE_BASE = -5000;
     private final Client client;
+    private final ClientThread clientThread;
     private boolean enabled;
     private final boolean isCombatSkill;
     private boolean showBanners;
@@ -28,6 +30,7 @@ class PrestigeSkill {
     @Inject
     public PrestigeSkill(
             Client client,
+            ClientThread clientThread,
             int skillWidgetId,
             Skill skill,
             Boolean enabled,
@@ -37,6 +40,7 @@ class PrestigeSkill {
         )
     {
         this.client = client;
+        this.clientThread = clientThread;
         this.skill = skill;
         this.skillWidgetId = skillWidgetId;
         this.enabled = enabled;
@@ -72,7 +76,10 @@ class PrestigeSkill {
         }
 
         this.enableCombatUsability = enableCombatUsability;
-        client.queueChangedSkill(skill);
+
+        clientThread.invoke(() -> {
+            client.queueChangedSkill(skill);
+        });
 
         this.update();
     }
@@ -84,7 +91,9 @@ class PrestigeSkill {
             borderWidget = null;
         }
 
-        client.queueChangedSkill(skill);
+        clientThread.invoke(() -> {
+            client.queueChangedSkill(skill);
+        });
     }
 
     public void update() {
@@ -101,13 +110,13 @@ class PrestigeSkill {
         int prestige = getPrestige(totalSkillXp);
         int level = getLevel(totalSkillXp, prestige);
 
-        Widget activeLevel = skillWidget.getChild(3);
+        Widget activeLevel = skillWidget.getChild(4);
         boolean shouldReplaceNumerator = !this.isCombatSkill || !this.enableCombatUsability;
         if (activeLevel != null && shouldReplaceNumerator) {
             activeLevel.setText(String.valueOf(level));
         }
 
-        Widget actualLevel = skillWidget.getChild(4);
+        Widget actualLevel = skillWidget.getChild(5);
         if (actualLevel != null) {
             actualLevel.setText(String.valueOf(level));
         }
