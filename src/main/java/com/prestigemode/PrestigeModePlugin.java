@@ -204,7 +204,7 @@ public class PrestigeModePlugin extends Plugin
 
         for (int i = 1; i <= MAX_PRESTIGE; i++)
         {
-            String path = "/borders/prestige-" + i + ".png";
+            String path = "/borders/type-1/prestige-" + i + ".png";
             try
             {
                 InputStream iStream = getClass().getResourceAsStream(path);

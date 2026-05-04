@@ -99,6 +99,7 @@ class PrestigeSkill {
 
         int totalSkillXp = client.getSkillExperience(this.skill);
         int prestige = getPrestige(totalSkillXp);
+//        int prestige = skill.ordinal();
         int level = getLevel(totalSkillXp, prestige);
 
         Widget activeLevel = skillWidget.getChild(3);
@@ -113,7 +114,8 @@ class PrestigeSkill {
         }
 
         if (this.showBanners) {
-            int spriteId = PRESTIGE_SPRITE_BASE + prestige;
+            int offset = skill.ordinal();
+            int spriteId = PRESTIGE_SPRITE_BASE + offset;
             if (this.borderWidget != null) {
                 this.borderWidget.setSpriteId(spriteId);
             } else {
